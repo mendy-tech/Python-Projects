@@ -1,0 +1,58 @@
+    class MpesaAccount:
+		def __init__(self, phone_number, balance):
+        self.phone_number = phone_number
+        self.balance = balance
+ 
+    def check_balance(self):
+        return f'Your MPESA Balance is:\nKshs. {self.balance}'
+ 
+    def deposit(self, amount):
+        self.balance += amount
+        return f'{amount} deposited successfully'
+ 
+    def withdraw(self, amount):
+        if amount <= self.balance:
+            self.balance -= amount
+            return f'Kshs. {amount} successfully deposited'
+        else:
+            return "Sorry you have an insufficient balance to withdraw"
+ 
+    def menu(self):
+        print("""
+____________WELCOME TO MPESA_______________
+0 - To check MPESA balance
+1 - To deposit to MPESA
+2 - To withdraw from MPESA
+3 - To Exit
+____________________________________________
+""")
+ 
+    def actions(self):
+        self.menu()
+        while True:
+            try:
+                customer_input = input('Enter selection: ')
+                if customer_input == str(0):
+                    print(self.check_balance())
+                    self.menu()
+                elif customer_input == str(1):
+                    amount_to_deposit = float(input("Enter amount to deposit: "))
+                    print(self.deposit(amount_to_deposit))
+                    self.menu()
+                elif customer_input == str(2):
+                    amount_to_withdraw = float(input("Enter amount to withdraw: "))
+                    print(self.withdraw(amount_to_withdraw))
+                    self.menu()
+                elif customer_input == str(3):
+                    print("Thank you for using Mpesa")
+                    break
+                else:
+                    print("Invalid selection")
+                    self.menu()
+            except ValueError:
+                print("Invalid entry")
+ 
+if __name__ == "__main__":
+    # Create an instance of the MpesaAccount class
+    account = MpesaAccount("0724345858", balance=500)
+    account.actions()
