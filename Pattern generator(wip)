@@ -1,0 +1,128 @@
+class AmigurumiPatternGenerator:
+    def __init__(self, shape, size):
+        self.shape = shape
+        self.size = size
+        self.pattern = []
+
+    def add_round(self, stitch_type, stitch_count):
+        self.pattern.append((stitch_type, stitch_count))
+
+    def generate_pattern(self):
+        if self.shape == "head":
+            self.generate_head_pattern()
+        elif self.shape == "body":
+            self.generate_body_pattern()
+        elif self.shape == "hands":
+            self.generate_hands_pattern()
+        elif self.shape == "heart":
+            self.generate_heart_pattern()
+        elif self.shape == "ears":
+            self.generate_ears_pattern()
+        else:
+            print(f"Invalid shape: {self.shape}")
+
+    # Implement the methods for generating each section's pattern here
+    def generate_head_pattern(self):
+        self.add_round("magic_ring", 6)
+        self.add_round("single_crochet", 8)  # Round 1
+        self.add_round("increase", 16)  # Round 2
+        self.add_round("single_crochet", 1)
+        self.add_round("increase", 1)  # Round 3
+        self.add_round("single_crochet", 2)
+        self.add_round("increase", 1)  # Round 4
+        self.add_round("single_crochet", 3)
+        self.add_round("increase", 1)  # Round 5
+        self.add_round("single_crochet", 4)
+        self.add_round("increase", 1)  # Round 6
+
+        for i in range(7, 18):  # Section 2 - Repeat rounds 7 to 17
+            self.add_round("single_crochet", 48)
+
+        self.add_round("single_crochet", 4)
+        self.add_round("decrease", 1)  # Round 18
+        self.add_round("single_crochet", 3)
+        self.add_round("decrease", 1)  # Round 19
+        self.add_round("single_crochet", 2)
+        self.add_round("decrease", 1)  # Round 20
+        self.add_round("single_crochet", 1)
+        self.add_round("decrease", 1)  # Round 21
+
+    def generate_body_pattern(self):
+        # Implement the body pattern generation here
+        pass
+
+    def generate_hands_pattern(self):
+        # Implement the hands pattern generation here
+        pass
+
+    def generate_heart_pattern(self):
+        # Implement the heart pattern generation here
+        pass
+
+    def generate_ears_pattern(self):
+        # Implement the ears pattern generation here
+        pass
+
+    def display_pattern(self):
+        print(f"Amigurumi {self.shape.capitalize()} Pattern (Size: {self.size}):")
+        for idx, (stitch_type, stitch_count) in enumerate(self.pattern, start=1):
+            print(f"Round {idx}: {stitch_count} {stitch_type}")
+        print("Pattern Complete.")
+
+
+if __name__ == "__main__":
+    # Example usage for generating the Head pattern
+    shape = "head"
+    size = "small"
+    generator = AmigurumiPatternGenerator(shape, size)
+    generator.generate_pattern()
+    generator.display_pattern()
+
+#amigurumi ears
+class AmigurumiEar:
+    def __init__(self, size):
+        self.size = size
+        self.pattern = []
+
+    def add_round(self, stitch_type, stitch_count):
+        self.pattern.append((stitch_type, stitch_count))
+
+    def generate_pattern(self):
+        self.generate_section1()
+        self.generate_section2()
+        self.generate_section3()
+
+    def generate_section1(self):
+        self.add_round("chain", 4)
+        self.add_round("single_crochet", 8)  # Round 1
+        self.add_round("increase", 8)  # Round 2
+        self.add_round("single_crochet", 1)
+        self.add_round("increase", 8)  # Round 3
+
+    def generate_section2(self):
+        for i in range(4, 22):  # Rounds 4 to 21 (total 24)
+            self.add_round("single_crochet", 24)
+
+    def generate_section3(self):
+        self.add_round("single_crochet", 2)
+        self.add_round("decrease", 1)  # Round 22
+        self.add_round("single_crochet", 1)
+        self.add_round("decrease", 1)  # Round 23
+        self.add_round("single_crochet", 1)
+        self.add_round("decrease", 1)  # Round 24
+        self.add_round("single_crochet", 12)
+        self.add_round("single_crochet", 12)  # Round 25 and 26
+
+    def display_pattern(self):
+        print(f"Amigurumi Ear Pattern (Size: {self.size}):")
+        for idx, (stitch_type, stitch_count) in enumerate(self.pattern, start=1):
+            print(f"Round {idx}: {stitch_count} {stitch_type}")
+        print("Pattern Complete.")
+
+
+if __name__ == "__main__":
+    # Example usage for generating the Ear pattern
+    size = "small"
+    ear = AmigurumiEar(size)
+    ear.generate_pattern()
+    ear.display_pattern()
