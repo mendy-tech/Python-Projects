@@ -1,0 +1,93 @@
+def generate_cake_recipe(weight, flavor):
+# Recipe ingredients and instructions for each flavor
+    cake_recipes = {
+        'vanilla': {
+            'ingredients': {
+                'flour': 330 * weight,
+                'sugar': 160 * weight,
+                'butter': 160 * weight,
+                'eggs': 4 * weight,
+                'vanilla extract': 0.5 * weight,
+                'baking powder': 1 * weight,
+                'milk': 90 * weight
+            },
+            'instructions': [
+                "Preheat the oven to 302°F (150°C).",
+                "In a large bowl, cream together the butter and sugar.",
+                "Beat in the eggs one at a time, then stir in the vanilla extract.",
+                "Combine the dry ingredients in a separate bowl.",
+                "Add the dry ingredients to the wet ingredients, alternating with milk.",
+                "Pour the batter into a greased cake pan.",
+                "Bake for 30-45 minutes or until a toothpick or knife inserted in the center comes out clean.",
+                "Let the cake cool before serving."
+            ]
+        },
+        'chocolate': {
+            'ingredients': {
+                'flour': 2.2 * weight,
+                'sugar': 1.4 * weight,
+                'butter': 0.6 * weight,
+                'eggs': 3 * weight,
+                'cocoa powder': 0.4 * weight,
+                'baking powder': 0.1 * weight,
+                'milk': 0.6 * weight
+            },
+            'instructions': [
+                "Preheat the oven to 350°F (175°C).",
+                "In a large bowl, cream together the butter and sugar.",
+                "Beat in the eggs one at a time.",
+                "Mix in the cocoa powder and baking powder.",
+                "Add the flour to the mixture, alternating with milk.",
+                "Pour the batter into a greased cake pan.",
+                "Bake for 25-30 minutes or until a toothpick inserted in the center comes out clean.",
+                "Let the cake cool before serving."
+            ]
+        },
+        'blueberry': {
+            'flour': 330 * weight,
+            'sugar': 180 * weight,
+            'butter': 180 * weight,
+            'eggs': 4 * weight,
+            'blueberry flavor': 0.5 * weight,
+            'baking powder': 1 * weight,
+            'milk': 90 * weight
+        },
+        'instructions': [
+            "Preheat the oven to 350°F (175°C).",
+            "In a large bowl, cream together the butter and sugar.",
+            "Beat in the eggs one at a time.",
+            "Mix in the flour and baking powder.",
+            "Add the flour to the mixture, alternating with milk.",
+            "Pour the batter into a greased cake pan.",
+            "Bake for 35-45 minutes or until a toothpick inserted in the center comes out clean.",
+            "Let the cake cool before serving."
+        ]
+    }
+
+    # Check if the requested flavor is available
+    if flavor.lower() not in cake_recipes:
+        return "Sorry, the requested flavor is not available. Please choose from 'vanilla' or 'chocolate'."
+
+    # Retrieve the recipe for the requested flavor
+    recipe = cake_recipes[flavor.lower()]
+
+    # Generate the cake recipe based on the weight
+    cake_recipe = f"----- {flavor.capitalize()} Cake Recipe (for {weight} grams) -----\n\n"
+    for ingredient, quantity in recipe['ingredients'].items():
+        cake_recipe += f"{ingredient.capitalize()}: {quantity} grams\n"
+
+    cake_recipe += "\nInstructions:\n"
+    for step, instruction in enumerate(recipe['instructions'], 1):
+        cake_recipe += f"{step}. {instruction}\n"
+
+    return cake_recipe
+
+
+if __name__ == "__main__":
+    # User input
+    cake_weight = float(input("Enter the weight of the cake (in kilograms): "))
+    cake_flavor = input("Enter the flavor of the cake (vanilla/chocolate/blueberry): ")
+
+    # Generate and display the cake recipe
+    recipe = generate_cake_recipe(cake_weight, cake_flavor)
+    print("\n" + recipe)
