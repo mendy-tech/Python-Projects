@@ -1,0 +1,131 @@
+completed = []
+pending = []
+all_tasks = []
+
+def menu():
+    print(f"""
+______________MENU________________
+1 - To See Tasks
+2 - To Add Tasks
+3 - To Mark Completed Tasks
+4 - To View Completed Tasks
+5 - To View Items Pending Completion
+6 - To Clear Completed Items
+7 - To Quit
+-----------------------------------""")
+
+def see_tasks():
+    global all_tasks
+    if len(all_tasks) == 0:
+        print(f"""
+        You have not added any tasks.""")
+    else:
+        print("""
+        All tasks:""")
+        for i, v in enumerate(all_tasks):
+            print(i + 1, v.capitalize())
+
+def add_tasks():
+    global all_tasks
+    while True:
+        task = input(f"""
+Enter a task : """)
+        if not task:
+            break
+        all_tasks.append(f'{task.capitalize()}')
+        print(f"""
+'{task}' has been added successfully""")
+        break
+        print("All tasks")
+        for i, v in enumerate(all_tasks):
+            print(i + 1, v.capitalize())
+
+
+
+def mark_as_completed():
+    global completed
+    global all_tasks
+    global pending
+    if not all_tasks:
+        print(f"""
+You have no tasks""")
+    else:
+        print(f'All tasks:')
+        see_tasks()
+        user = input(f"""
+Enter the number of the task to mark as completed: """)
+        try:
+            user_idx = int(user) - 1
+            if 0 <= user_idx < len(all_tasks):
+                done = all_tasks.pop(user_idx)
+                completed.append(done)
+                print(f"""
+Task marked as completed""")
+            else:
+                print(f"""
+Invalid task number""")
+        except ValueError:
+            print(f"""
+Invalid input. Please enter a valid number.""")
+
+def view_completed():
+    global completed
+    if len(completed) == 0:
+        print(f"""
+You have no completed tasks""")
+    else:
+        print(f"""
+Completed tasks:""")
+        for i, v in enumerate(completed):
+            print(i + 1, v.capitalize())
+
+def pending_completion():
+    global all_tasks
+    global completed
+    pending = [task for task in all_tasks if task not in completed]
+    if not pending:
+        print(f"""
+You don't have any tasks pending completion""")
+    else:
+        print(f"""
+Tasks pending completion:""")
+        for i, v in enumerate(pending):
+            print(i + 1, v.capitalize())
+
+def clear_completed():
+    global completed
+    if not completed:
+        print(f"""
+You have no completed tasks""")
+    else:
+        completed.clear()
+        print(f"""
+All completed tasks have been cleared""")
+
+def main():
+    while True:
+        menu()
+        user_choice = input(f"""
+Enter your selection: """)
+        if user_choice == str(1):
+            see_tasks()
+        elif user_choice == str(2):
+            add_tasks()
+        elif user_choice == str(3):
+            mark_as_completed()
+        elif user_choice == str(4):
+            view_completed()
+        elif user_choice == str(5):
+            pending_completion()
+        elif user_choice == str(6):
+            clear_completed()
+        elif user_choice == str(7):
+            print(f"""
+Goodbye!""")
+            break
+        else:
+            print(f"""
+____________________Invalid Choice_________________""")
+
+if __name__ == "__main__":
+    main()
